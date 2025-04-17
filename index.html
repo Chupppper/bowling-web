@@ -281,6 +281,27 @@
         image: "",
         content: `
           <style>
+            .price-top-button {
+              display: flex;
+              justify-content: flex-end;
+              margin-bottom: 1.5rem;
+            }
+
+            .price-top-button button {
+              background: #4A90E2;
+              color: white;
+              padding: 0.6rem 1.2rem;
+              border-radius: 8px;
+              border: none;
+              font-size: 0.95rem;
+              font-weight: bold;
+              cursor: pointer;
+            }
+
+            .price-top-button button:hover {
+              background-color: #357acb;
+            }
+
             .price-section {
               margin-bottom: 2rem;
             }
@@ -335,6 +356,10 @@
             </table>
           </div>
 
+          <div class="price-top-button">
+            <button onclick="goToSection('reserve')">Reserve a Lane</button>
+          </div>
+
           <div class="price-section">
             <h3>Seniors (Mon – Thu, Open – 5pm)</h3>
             <table class="price-table">
@@ -357,18 +382,322 @@
       leagues: {
         title: "Leagues",
         image: "",
-        content: "<p>Join our bowling leagues — whether you're a pro or just getting started!</p>"
+        content: `
+          <style>
+            .league-info {
+              margin-bottom: 2rem;
+            }
+
+            .league-info h3 {
+              color: #4A90E2;
+              margin-bottom: 0.5rem;
+            }
+
+            .league-form {
+              max-width: 600px;
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+            }
+
+            .league-form label {
+              font-weight: 600;
+            }
+
+            .league-form input,
+            .league-form select,
+            .league-form textarea {
+              padding: 0.6rem;
+              border-radius: 8px;
+              border: 1px solid #ccc;
+              font-size: 1rem;
+              width: 100%;
+            }
+
+            .submit-button {
+              align-self: flex-end;
+              background-color: #4A90E2;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              padding: 0.7rem 1.5rem;
+              font-weight: bold;
+              cursor: pointer;
+              font-size: 1rem;
+            }
+
+            .submit-button:hover {
+              background-color: #357acb;
+            }
+          </style>
+
+
+          <div class="league-info">
+            <h3>Join a Bowling League!</h3>
+            <p>Whether you're a seasoned pro or a weekend roller, we have leagues for every skill level and age group. Leagues run weekly and include great perks like discounted games, shoe rentals, and special tournaments.</p>
+            <p>League play starts this fall — sign up today to reserve your spot!</p>
+          </div>
+
+          <form class="league-form">
+            <div>
+              <label for="league-name">Full Name:</label>
+              <input type="text" id="league-name" name="league-name" required />
+            </div>
+
+            <div>
+              <label for="league-email">Email Address:</label>
+              <input type="email" id="league-email" name="league-email" required />
+            </div>
+
+            <div>
+              <label for="league-phone">Phone Number:</label>
+              <input type="tel" id="league-phone" name="league-phone" />
+            </div>
+
+            <div>
+              <label for="league-type">League Type:</label>
+              <select id="league-type" name="league-type" required>
+                <option value="">-- Please Select --</option>
+                <option value="mixed">Mixed League</option>
+                <option value="youth">Youth League</option>
+                <option value="senior">Senior League</option>
+                <option value="competitive">Competitive League</option>
+                <option value="casual">Just for Fun</option>
+             </select>
+            </div>
+
+            <div>
+              <label for="league-notes">Additional Notes:</label>
+              <textarea id="league-notes" name="league-notes" rows="3" placeholder="Let us know if you have teammates, schedule preferences, etc."></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Sign Up</button>
+          </form>
+        `
       },
+  
       deals: {
         title: "Coupons and Deals",
         image: "",
-        content: "<p>Don't miss out on our weekly deals, discount nights, and family specials!</p>"
-      },
+        content: `
+          <style>
+          .deals-section {
+            margin-bottom: 3rem;
+          }
+
+          .deals-header {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #4A90E2;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+          }
+
+          .deals-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+
+          .deals-list li {
+            background: var(--card);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+          }
+
+          .coupon-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+          }
+
+          .coupon {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fefefe;
+            border: 1px dashed #aaa;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+          }
+
+          .coupon h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #4A90E2;
+          }
+
+          .download-btn {
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9rem;
+          }
+
+          .download-btn:hover {
+            background-color: #357acb;
+          }
+        </style>
+
+        <div class="deals-section">
+          <div class="deals-header">🎯 Daily Deals</div>
+          <div class="deals-list">
+            <ul>
+              <li><strong>Monday:</strong> Kids Bowl Free (under 10), $2 hot dogs, $10 pitchers of soda</li>
+              <li><strong>Tuesday:</strong> Taco & Tap Tuesday – $3 tacos, $12 beer pitchers</li>
+              <li><strong>Wednesday:</strong> Half-Price Games after 6pm, $3 domestic drafts</li>
+              <li><strong>Thursday:</strong> Ladies Night – 2-for-1 games for women, $5 margaritas</li>
+              <li><strong>Friday:</strong> Family Night – $40 for 4 games + shoes + pizza</li>
+              <li><strong>Saturday:</strong> Late Night Happy Hour – $2 shots, $3 beers from 10pm–Midnight</li>
+              <li><strong>Sunday:</strong> Strike & Slice – $15 unlimited bowling + personal pizza (after 5pm)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="deals-section">
+          <div class="deals-header">🎟️ Printable Coupons</div>
+          <div class="coupon-list">
+            <div class="coupon">
+             <h4>🎳 $5 Off Any Weekend Game</h4>
+              <button class="download-btn">Download</button>
+            </div>
+            <div class="coupon">
+              <h4>🍕 Free Slice of Pizza with Shoe Rental</h4>
+              <button class="download-btn">Download</button>
+            </div>
+           <div class="coupon">
+              <h4>👨‍👩‍👧‍👦 Family of 4 – 25% Off Friday Nights</h4>
+              <button class="download-btn">Download</button>
+            </div>
+            <div class="coupon">
+              <h4>🎯 2 Free Games with League Sign-up</h4>
+              <button class="download-btn">Download</button>
+           </div>
+          </div>
+        </div>
+      `
+    },
       restaurant: {
         title: "Restaurant",
         image: "",
-        content: "<p>Grab a bite! From snacks to full meals, we’ve got something for everyone.</p>"
-      },
+        content:  `
+          <style>
+            .restaurant-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              grid-template-areas:
+                'starters desserts'
+                'mains drinks';
+             gap: 2rem;
+             margin-top: 1.5rem;
+            }
+
+             .menu-section {
+              background: var(--card);
+              border-radius: 12px;
+              padding: 1.5rem;
+              box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+
+            .menu-section h3 {
+              color: #4A90E2;
+              margin-bottom: 0.75rem;
+              font-size: 1.4rem;
+            }
+
+            .menu-photo {
+              width: 100%;
+              max-width: 200px;
+              height: 150px;
+              object-fit: cover;
+              border-radius: 8px;
+              margin-bottom: 1rem;
+            }
+
+             .menu-items {
+              list-style: none;
+              padding: 0;
+              text-align: center;
+              line-height: 1.6;
+            }
+
+            .starters { grid-area: starters; }
+            .mains { grid-area: mains; }
+            .desserts { grid-area: desserts; }
+            .drinks { grid-area: drinks; }
+
+            @media (max-width: 768px) {
+              .restaurant-grid {
+                grid-template-areas:
+                  'starters'
+                  'desserts'
+                  'mains'
+                  'drinks';
+                grid-template-columns: 1fr;
+              }
+            }
+          </style>
+
+          <div class="restaurant-grid">
+            <div class="menu-section starters">
+              <h3>Starters</h3>
+              <img class="menu-photo" src="https://static.vecteezy.com/system/resources/previews/049/575/330/non_2x/delicious-loaded-nachos-with-ground-beef-tomatoes-olives-and-cilantro-free-png.png" alt="Starters">
+              <ul class="menu-items">
+               <li>Loaded Nachos 13$</li>
+                <li>Cheesy Mozzarella Sticks 9$</li>
+                <li>Buffalo Wings 14$</li>
+               <li>Onion Ring Tower 13$</li>
+              </ul>
+           </div>
+
+            <div class="menu-section desserts">
+              <h3>Desserts</h3>
+              <img class="menu-photo" src="https://png.pngtree.com/png-clipart/20240314/original/pngtree-chocolate-lava-cake-png-with-ai-generated-png-image_14587551.png" alt="Desserts">
+              <ul class="menu-items">
+                <li>Chocolate Lava Cake 8$</li>
+                <li>Ice Cream Sundae 7$</li>
+                <li>Apple Pie 8$</li>
+                <li>Cheesecake Bites 10$</li>
+              </ul>
+            </div>
+
+            <div class="menu-section mains">
+              <h3>Main Dishes</h3>
+              <img class="menu-photo" src="https://img.freepik.com/free-psd/juicy-cheeseburger-gourmet-burger-perfection_632498-25274.jpg?semt=ais_hybrid&w=740" alt="Mains">
+              <ul class="menu-items">
+               <li>StrikeZone Burger 15$</li>
+               <li>Grilled Chicken Sandwich 12$</li>
+               <li>BBQ Rib Platter 18$</li>
+               <li>Veggie Bowl 9$</li>
+             </ul>
+            </div>
+
+             <div class="menu-section drinks">
+              <h3>Drinks</h3>
+              <img class="menu-photo" src="https://e7.pngegg.com/pngimages/642/549/png-clipart-beer-pitcher-cocktail-carib-stag-jug-beer-glass-pint-glass.png" alt="Drinks">
+              <ul class="menu-items">
+                <li>Craft Beer Pitchers 12$</li>
+               <li>Classic Milkshakes 8$</li>
+               <li>Soft Drinks & Sodas 4$</li>
+               <li>Margaritas & Mixed Drinks 9$</li>
+              </ul>
+           </div>
+         </div>
+         `
+        },
       parties: {
         title: "Birthdays and Corporate Parties",
         image: "",
