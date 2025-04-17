@@ -192,7 +192,89 @@
       reserve: {
         title: "Reserve a Lane",
         image: "",
-        content: "<p>Book your spot online. Choose your time, number of players, and you're all set!</p>"
+        content: `
+          <style>
+            .reserve-form {
+              max-width: 600px;
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+            }
+
+            .reserve-form label {
+              font-weight: 600;
+              margin-bottom: 0.2rem;
+            }
+
+            .reserve-form input {
+              padding: 0.6rem;
+              border-radius: 8px;
+              border: 1px solid #ccc;
+              font-size: 1rem;
+              width: 100%;
+            }
+
+            .submit-button {
+              align-self: flex-end;
+              background-color: #4A90E2;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              padding: 0.7rem 1.5rem;
+              font-weight: bold;
+              cursor: pointer;
+              font-size: 1rem;
+            }
+
+            .submit-button:hover {
+              background-color: #357acb;
+            }
+          </style>
+
+          <form class="reserve-form">
+            <div>
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+
+            <div>
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+
+            <div>
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+
+            <div>
+              <label for="time">Time:</label>
+              <input type="time" id="time" name="time" required />
+            </div>
+
+            <div>
+              <label for="players"># of players:</label>
+              <input type="number" id="players" name="players" required />
+            </div>
+
+            <div>
+              <label for="lanes"># of lanes:</label>
+              <input type="number" id="lanes" name="lanes" required />
+            </div>
+
+            <div>
+              <label for="shoes">Shoe Sizes of players (separate by comma):</label>
+              <input type="text" id="shoes" name="shoes" placeholder="e.g. 7, 8.5, 10, 6" required />
+            </div>
+
+            <div>
+              <label for="games"># of games:</label>
+              <input type="number" id="games" name="games" required />
+            </div>
+
+            <button type="submit" class="submit-button">Submit</button>
+          </form>
+        `
       },
       prices: {
         title: "Prices",
@@ -242,8 +324,7 @@
         mainEl.title = data.title;
         mainEl.image = data.image;
         mainEl.content = data.content;
-
-        setTimeout(startPhotoShuffle, 100); // wait for DOM to update
+        setTimeout(startPhotoShuffle, 200);
       } else {
         mainEl.title = "Welcome";
         mainEl.image = "";
@@ -277,14 +358,17 @@
       "https://tripleseat.com/wp-content/uploads/2022/08/The-Rise-of-Boutique-Bowling-Alleys.png"
     ];
 
+    let shuffleInterval;
+
     function startPhotoShuffle() {
-      const img = document.getElementById("photo-shuffler");
+      const img = document.querySelector("bowling-web")?.shadowRoot?.getElementById("photo-shuffler");
       if (!img) return;
 
       let index = 0;
       img.src = shufflerImages[index];
 
-      setInterval(() => {
+      if (shuffleInterval) clearInterval(shuffleInterval);
+      shuffleInterval = setInterval(() => {
         index = (index + 1) % shufflerImages.length;
         img.src = shufflerImages[index];
       }, 3000);
