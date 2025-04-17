@@ -701,23 +701,438 @@
       parties: {
         title: "Birthdays and Corporate Parties",
         image: "",
-        content: "<p>Celebrate in style! We host unforgettable parties for birthdays and companies alike.</p>"
-      },
+        content: `
+          <style>
+          .party-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+          }
+
+          .party-section {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+          }
+
+          .party-section h3 {
+            margin-top: 0;
+            color: #4A90E2;
+          }
+
+          .party-description {
+            margin-bottom: 1rem;
+          }
+
+          .party-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+          }
+
+          .party-form label {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+          }
+
+          .party-form input,
+          .party-form textarea {
+            padding: 0.6rem;
+           border-radius: 8px;
+           border: 1px solid #ccc;
+           font-size: 1rem;
+         }
+
+         .submit-button {
+            align-self: flex-start;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+           padding: 0.7rem 1.5rem;
+           font-weight: bold;
+           cursor: pointer;
+           font-size: 1rem;
+           margin-top: 0.5rem;
+          }
+
+          .submit-button:hover {
+            background-color: #357acb;
+          }
+
+          @media (max-width: 768px) {
+            .party-grid {
+             grid-template-columns: 1fr;
+            }
+          }
+       </style>
+
+       <div class="party-grid">
+          <!-- Birthday Party Section -->
+          <div class="party-section">
+           <h3>🎉 Birthday Parties</h3>
+            <p class="party-description">
+              Make your special day unforgettable with bumpers, music, food, and fun! Great for kids, teens, and adults.
+            </p>
+            <form class="party-form">
+             <div>
+               <label for="bday-name">Name:</label>
+                <input type="text" id="bday-name" name="bday-name" required />
+             </div>
+             <div>
+               <label for="bday-email">Email:</label>
+                <input type="email" id="bday-email" name="bday-email" required />
+              </div>
+              <div>
+               <label for="bday-date">Date of Party:</label>
+                <input type="date" id="bday-date" name="bday-date" required />
+              </div>
+             <div>
+                <label for="bday-guests">Number of Guests:</label>
+                <input type="number" id="bday-guests" name="bday-guests" required />
+              </div>
+              <div>
+                <label for="bday-notes">Special Notes:</label>
+                <textarea id="bday-notes" name="bday-notes" rows="2" placeholder="Any themes or requests?"></textarea>
+              </div>
+             <button type="submit" class="submit-button">Submit</button>
+           </form>
+         </div>
+
+         <!-- Corporate Party Section -->
+          <div class="party-section">
+            <h3>🏢 Corporate Parties</h3>
+            <p class="party-description">
+              Host your next team-building event or company celebration with lanes, food, and private lounge options.
+            </p>
+           <form class="party-form">
+             <div>
+               <label for="corp-name">Name:</label>
+               <input type="text" id="corp-name" name="corp-name" required />
+             </div>
+             <div>
+               <label for="corp-email">Email:</label>
+               <input type="email" id="corp-email" name="corp-email" required />
+             </div>
+             <div>
+               <label for="corp-company">Company Name:</label>
+               <input type="text" id="corp-company" name="corp-company" />
+             </div>
+             <div>
+               <label for="corp-date">Date of Event:</label>
+               <input type="date" id="corp-date" name="corp-date" required />
+             </div>
+             <div>
+               <label for="corp-guests">Number of Attendees:</label>
+               <input type="number" id="corp-guests" name="corp-guests" required />
+             </div>
+             <div>
+               <label for="corp-notes">Special Notes:</label>
+               <textarea id="corp-notes" name="corp-notes" rows="2" placeholder="Private room? Food packages?"></textarea>
+             </div>
+             <button type="submit" class="submit-button">Submit</button>
+           </form>
+         </div>
+        </div>
+      `
+    },
       fundraisers: {
         title: "Fundraisers",
         image: "",
-        content: "<p>Partner with us for your next fundraising event — fun and community combined.</p>"
-      },
+        content: `
+           <style>
+            .fundraiser-wrapper {
+              background: var(--card);
+             padding: 2rem;
+             border-radius: 12px;
+              box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+              margin-top: 1rem;
+           }
+
+           .fundraiser-wrapper h3 {
+            color: #4A90E2;
+            margin-top: 0;
+          }
+
+          .fundraiser-wrapper ul {
+            padding-left: 1.2rem;
+            margin-bottom: 1.5rem;
+          }
+
+          .fundraiser-wrapper li {
+            margin-bottom: 0.5rem;
+          }
+
+          .fundraiser-form {
+            display: flex;
+            flex-direction: column;
+           gap: 0.8rem;
+            max-width: 600px;
+          }
+
+          .fundraiser-form label {
+            font-weight: 600;
+          }
+
+          .fundraiser-form input,
+          .fundraiser-form textarea {
+           padding: 0.6rem;
+           border-radius: 8px;
+           border: 1px solid #ccc;
+           font-size: 1rem;
+          }
+
+          .submit-button {
+            align-self: flex-start;
+           background-color: #4A90E2;
+           color: white;
+           border: none;
+           border-radius: 8px;
+           padding: 0.7rem 1.5rem;
+           font-weight: bold;
+           cursor: pointer;
+           font-size: 1rem;
+           margin-top: 0.5rem;
+          }
+
+          .submit-button:hover {
+            background-color: #357acb;
+          }
+        </style>
+
+        <div class="fundraiser-wrapper">
+          <h3>Raise Funds the Fun Way!</h3>
+          <p>Looking for a unique and engaging way to support your school, team, or non-profit? Host your next fundraiser at Westland Bowling and let the strikes help your cause!</p>
+
+          <p>We provide flexible packages and group pricing to help maximize your donations while ensuring everyone has a blast.</p>
+
+          <h4>Popular Fundraiser Ideas:</h4>
+          <ul>
+            <li>🎳 Bowl-a-thons for schools or sports teams</li>
+            <li>👨‍👩‍👧‍👦 Family fun nights with raffles</li>
+            <li>🏆 Team competitions and prize giveaways</li>
+            <li>🍕 Food & beverage sales supporting your group</li>
+          </ul>
+
+          <h4>Get in Touch</h4>
+          <form class="fundraiser-form">
+            <div>
+             <label for="fundraiser-name">Your Name:</label>
+              <input type="text" id="fundraiser-name" name="fundraiser-name" required />
+            </div>
+           <div>
+             <label for="fundraiser-email">Email Address:</label>
+             <input type="email" id="fundraiser-email" name="fundraiser-email" required />
+           </div>
+            <div>
+             <label for="fundraiser-org">Organization / Group Name:</label>
+             <input type="text" id="fundraiser-org" name="fundraiser-org" required />
+           </div>
+            <div>
+             <label for="fundraiser-type">Event Type or Idea:</label>
+              <input type="text" id="fundraiser-type" name="fundraiser-type" placeholder="e.g. Bowl-a-thon, Community Night" />
+           </div>
+           <div>
+              <label for="fundraiser-message">Message / Details:</label>
+              <textarea id="fundraiser-message" name="fundraiser-message" rows="3" placeholder="Tell us more about what you have in mind!"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Send Inquiry</button>
+          </form>
+       </div>
+      `
+    },
       tournaments: {
         title: "Tournaments",
         image: "",
-        content: "<p>Enter the competition or just come watch — prizes, bragging rights, and excitement await.</p>"
+        content: `
+          <style>
+            .tournament-wrapper {
+             background: var(--card);
+             padding: 2rem;
+             border-radius: 12px;
+             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+             margin-top: 1rem;
+            }
+
+            .tournament-wrapper h3 {
+              color: #4A90E2;
+              margin-top: 0;
+            }
+
+            .tournament-list {
+              margin: 1rem 0 2rem;
+            }
+
+            .tournament-list ul {
+              padding-left: 1.2rem;
+            }
+
+            .tournament-list li {
+              margin-bottom: 0.5rem;
+              font-weight: 500;
+            }
+
+            .signup-form {
+             display: flex;
+             flex-direction: column;
+             gap: 0.8rem;
+             max-width: 600px;
+            }
+
+            .signup-form label {
+             font-weight: 600;
+            }
+
+             .signup-form input,
+            .signup-form select,
+            .signup-form textarea {
+              padding: 0.6rem;
+             border-radius: 8px;
+             border: 1px solid #ccc;
+             font-size: 1rem;
+            }
+
+            .submit-button {
+              align-self: flex-start;
+              background-color: #4A90E2;
+              color: white;
+              border: none;
+             border-radius: 8px;
+             padding: 0.7rem 1.5rem;
+             font-weight: bold;
+              cursor: pointer;
+              font-size: 1rem;
+              margin-top: 0.5rem;
+           }
+
+           .submit-button:hover {
+              background-color: #357acb;
+            }
+          </style>
+
+          <div class="tournament-wrapper">
+            <h3>Westland Tournaments</h3>
+            <p>Think you’ve got what it takes to top the leaderboard? Compete in one of our upcoming bowling tournaments and win trophies, prizes, and bragging rights!</p>
+
+            <div class="tournament-list">
+              <h4>🎯 Upcoming Tournaments:</h4>
+              <ul>
+               <li>April 28 – Spring Strike Showdown (Doubles)</li>
+                <li>May 11 – Youth Challenge Cup (Ages 10–17)</li>
+               <li>June 2 – Company Clash Invitational</li>
+                <li>June 22 – Midnight Bowl Bash (9pm–2am)</li>
+             </ul>
+           </div>
+
+           <h4>📝 Tournament Sign-Up</h4>
+            <form class="signup-form">
+             <div>
+                <label for="tourney-name">Full Name:</label>
+               <input type="text" id="tourney-name" name="tourney-name" required />
+             </div>
+             <div>
+                <label for="tourney-email">Email Address:</label>
+                <input type="email" id="tourney-email" name="tourney-email" required />
+              </div>
+              <div>
+                <label for="tourney-team">Team Name (if applicable):</label>
+                <input type="text" id="tourney-team" name="tourney-team" />
+              </div>
+             <div>
+               <label for="tourney-select">Select Tournament:</label>
+               <select id="tourney-select" name="tourney-select" required>
+                 <option value="">-- Choose One --</option>
+                  <option value="spring">Spring Strike Showdown</option>
+                  <option value="youth">Youth Challenge Cup</option>
+                  <option value="company">Company Clash Invitational</option>
+                  <option value="midnight">Midnight Bowl Bash</option>
+                </select>
+              </div>
+              <div>
+                <label for="tourney-notes">Notes / Questions:</label>
+                <textarea id="tourney-notes" name="tourney-notes" rows="3" placeholder="Anything we should know?"></textarea>
+             </div>
+             <button type="submit" class="submit-button">Sign Up</button>
+            </form>
+          </div>
+        `
       },
+
       hours: {
         title: "Hours and Directions",
         image: "",
-        content: "<p>Find our opening times and location — we can’t wait to see you!</p>"
-      }
+        content: `
+          <style>
+            .hours-directions {
+              display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 2rem;
+              margin-top: 1.5rem;
+            }
+
+            .hours-box, .directions-box {
+              background: var(--card);
+              padding: 1.5rem;
+              border-radius: 12px;
+              box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            }
+
+            .hours-box h3,
+            .directions-box h3 {
+             margin-top: 0;
+             color: #4A90E2;
+            }
+
+            .hours-box ul {
+              list-style: none;
+              padding: 0;
+              margin: 0;
+              line-height: 1.8;
+            }
+
+            .hours-box li {
+              font-size: 1rem;
+             font-weight: 500;
+            }
+
+            .directions-box p {
+              margin: 0.5rem 0 0 0;
+              font-size: 1rem;
+            }
+
+             @media (max-width: 768px) {
+              .hours-directions {
+                grid-template-columns: 1fr;
+              }
+            }
+          </style>
+
+          <div class="hours-directions">
+            <div class="hours-box">
+              <h3>📅 Business Hours</h3>
+              <ul>
+               <li><strong>Monday:</strong> 5:00 PM – Midnight</li>
+               <li><strong>Tuesday:</strong> 11:00 AM – Midnight</li>
+               <li><strong>Wednesday:</strong> 11:00 AM – Midnight</li>
+                <li><strong>Thursday:</strong> 11:00 AM – Midnight</li>
+               <li><strong>Friday:</strong> 11:00 AM – Midnight</li>
+               <li><strong>Saturday:</strong> 11:00 AM – Midnight</li>
+               <li><strong>Sunday:</strong> 11:00 AM – Midnight</li>
+             </ul>
+            </div>
+
+            <div class="directions-box">
+              <h3>📍 Directions</h3>
+              <p>Westland Bowling Center</p>
+              <p>9877 Pinsetter Parkway</p>
+              <p>Rollertown, PA 19456</p>
+             <p>Located next to StrikeZone Motel & Lucky Strike Grill</p>
+           </div>
+          </div>
+          `
+        },
     };
 
     function updateContent(key) {
@@ -778,5 +1193,12 @@
 
     updateContent("home");
   </script>
+  
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p><strong>Contact:</strong> westlandbowling@gmail.com</p>
+      <p><strong>Location:</strong> 9877 Pinsetter Parkway, Rollertown, PA 19456</p>
+    </div>
+  </footer>
 </body>
 </html>
