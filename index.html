@@ -1,81 +1,296 @@
-import { LitElement, html, css } from "lit";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Westland Bowling</title>
+  <style>
+    :root {
+      --bg: #f2f2f3;
+      --text: #333;
+      --card: #f9f9f9;
+      --link: #4A90E2;
+      --nav-bg: #f4f4f4;
+    }
 
-class ForFun extends LitElement {
-  static get properties() {
-    return {
-      title: { type: String },
-      image: { type: String },
-      content: { type: String },
-    };
-  }
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #ddd;
+      --card: #1e1e1e;
+      --link: #81c8ff;
+      --nav-bg: #2a2a2a;
+    }
 
-  constructor() {
-    super();
-    this.title = "Welcome";
-    this.image = "";
-    this.content = "<p>Loading...</p>";
-  }
-
-  static styles = css`
-    :host {
-      display: block;
-      background: var(--card);       /* ✅ supports light/dark mode */
-      color: var(--text);            /* ✅ theme-aware text */
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    body {
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      transition: all 0.3s ease;
-      animation: fadeIn 0.4s ease;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background 0.3s;
     }
 
-    h2 {
-      color: #4A90E2;
-      margin-bottom: 1rem;
-      font-size: 1.8rem;
+    header {
+      background: url('https://img.pikbest.com/png-images/qianku/bowling-lane_2395589.png!bw700') center center / cover no-repeat;
+      padding: 4rem 1rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
     }
 
-    img {
+    header::before {
+      content: "Westland Bowling";
       display: block;
-      max-width: 100%;
-      max-height: 300px;
-      width: auto;
-      height: auto;
-      border-radius: 12px;
-      object-fit: cover;
-      margin-bottom: 1.5rem;
-      animation: fadeIn 0.6s ease;
-    }
-
-    p, li, a {
-      font-size: 1rem;
-      color: var(--text);           /* ✅ ensures paragraphs follow theme */
-      line-height: 1.6;
-    }
-
-    a {
       color: #4A90E2;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    }
+
+    #theme-toggle {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: white;
+      color: #333;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      z-index: 2;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      max-width: 1200px;
+      margin: 2rem auto;
+      width: 95%;
+      gap: 2rem;
+    }
+
+    nav {
+      width: 240px;
+      background-color: var(--nav-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    nav h3 {
+      margin: 0 0 1rem;
+      font-size: 1.2rem;
+    }
+
+    nav a {
+      display: block;
+      background: var(--card);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
       text-decoration: none;
+      color: var(--text);
+      transition: background 0.2s, transform 0.2s;
+      border: 1px solid transparent;
+      text-align: center;
     }
 
-    a:hover {
-      text-decoration: underline;
+    nav a:hover {
+      background: var(--link);
+      color: white;
+      transform: translateX(4px);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    main {
+      flex: 1;
     }
-  `;
+  </style>
+</head>
+<body>
 
-  render() {
-    return html`
-      <h2>${this.title}</h2>
-      ${this.image ? html`<img src="${this.image}" alt="${this.title}" />` : ""}
-      <div>${unsafeHTML(this.content)}</div>
-    `;
-  }
-}
+  <header>
+    <button id="theme-toggle">🌙 Dark Mode</button>
+  </header>
 
-customElements.define("for-fun", ForFun);
+  <div class="container">
+    <nav>
+      <h3>Menu</h3>
+      <a href="#home">Home</a>
+      <a href="#reserve">Reserve</a>
+      <a href="#prices">Prices</a>
+      <a href="#leagues">Leagues</a>
+      <a href="#deals">Coupons and Deals</a>
+      <a href="#restaurant">Restaurant</a>
+      <a href="#parties">Birthdays and Corporate Parties</a>
+      <a href="#fundraisers">Fundraisers</a>
+      <a href="#tournaments">Tournaments</a>
+      <a href="#hours">Hours and Directions</a>
+    </nav>
+
+    <main>
+      <bowling-web id="mainContent"></bowling-web>
+    </main>
+  </div>
+
+  <script type="module" src="./bowling-web.js"></script>
+  <script type="module">
+    const mainEl = document.getElementById("mainContent");
+    const links = document.querySelectorAll("nav a");
+    const themeBtn = document.getElementById("theme-toggle");
+
+    const contentMap = {
+      home: {
+        title: "Welcome to Westland Bowling",
+        image: "",
+        content: `
+          <div class="home-grid" style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+              'reserve address'
+              'hours photo'
+              'business event';
+            gap: 2rem;
+            margin-top: 2rem;
+          ">
+            <div class="home-box reserve" style="grid-area: reserve;">
+              <h3>Reserve a Lane</h3>
+              <p>Skip the line and reserve online now!</p>
+              <button class="reserve-button" style="background:#4A90E2;color:white;padding:0.75rem 1.5rem;border:none;border-radius:8px;font-weight:bold;" onclick="goToSection('reserve')">Reserve Now</button>
+            </div>
+            <div class="home-box address" style="grid-area: address;">
+              <h3>Address</h3>
+              <p>123 Bowling Lane Blvd.<br>Rollertown, PA 19456</p>
+            </div>
+            <div class="home-box hours" style="grid-area: hours;">
+              <h3>Hours</h3>
+              <p>Mon–Thu: 12pm – 10pm<br>Fri: 12pm – Midnight<br>Sat: 10am – Midnight<br>Sun: 11am – 9pm</p>
+            </div>
+            <div class="home-box photo" style="grid-area: photo;">
+              <img id="photo-shuffler" style="width:100%; height:300px; object-fit:cover; border-radius:10px;" />
+            </div>
+            <div class="home-box business" style="grid-area: business;">
+              <h3>Other Businesses</h3>
+              <ul>
+                <li>Lucky Strike Bar & Grill</li>
+                <li>StrikeZone Motel</li>
+              </ul>
+            </div>
+            <div class="home-box event" style="grid-area: event;">
+              <h3>Current Event</h3>
+              <p>🎳 Easter Egg Bowl-a-thon!<br>Saturday 4/20 • Free candy with every strike!</p>
+            </div>
+          </div>
+        `
+      },
+      reserve: {
+        title: "Reserve a Lane",
+        image: "",
+        content: "<p>Book your spot online. Choose your time, number of players, and you're all set!</p>"
+      },
+      prices: {
+        title: "Prices",
+        image: "",
+        content: "<p>Check out our pricing for games, shoe rentals, and special offers.</p>"
+      },
+      leagues: {
+        title: "Leagues",
+        image: "",
+        content: "<p>Join our bowling leagues — whether you're a pro or just getting started!</p>"
+      },
+      deals: {
+        title: "Coupons and Deals",
+        image: "",
+        content: "<p>Don't miss out on our weekly deals, discount nights, and family specials!</p>"
+      },
+      restaurant: {
+        title: "Restaurant",
+        image: "",
+        content: "<p>Grab a bite! From snacks to full meals, we’ve got something for everyone.</p>"
+      },
+      parties: {
+        title: "Birthdays and Corporate Parties",
+        image: "",
+        content: "<p>Celebrate in style! We host unforgettable parties for birthdays and companies alike.</p>"
+      },
+      fundraisers: {
+        title: "Fundraisers",
+        image: "",
+        content: "<p>Partner with us for your next fundraising event — fun and community combined.</p>"
+      },
+      tournaments: {
+        title: "Tournaments",
+        image: "",
+        content: "<p>Enter the competition or just come watch — prizes, bragging rights, and excitement await.</p>"
+      },
+      hours: {
+        title: "Hours and Directions",
+        image: "",
+        content: "<p>Find our opening times and location — we can’t wait to see you!</p>"
+      }
+    };
+
+    function updateContent(key) {
+      const data = contentMap[key];
+      if (data) {
+        mainEl.title = data.title;
+        mainEl.image = data.image;
+        mainEl.content = data.content;
+
+        setTimeout(startPhotoShuffle, 100); // wait for DOM to update
+      } else {
+        mainEl.title = "Welcome";
+        mainEl.image = "";
+        mainEl.content = "<p>Select a section from the left menu to get started.</p>";
+      }
+    }
+
+    window.goToSection = function (key) {
+      updateContent(key);
+    };
+
+    links.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const key = link.getAttribute("href").substring(1);
+        updateContent(key);
+      });
+    });
+
+    themeBtn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      themeBtn.textContent = next === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
+    });
+
+    const shufflerImages = [
+      "https://www.tenpin.co.uk/media/6084/bowling-lane-at-tenpin-lit-up-with-led-lighting.png",
+      "https://www.neon-entertainment.com/wp-content/uploads/2022/11/Website-Page-Images-7.png",
+      "https://kansascitymomcollective.com/wp-content/uploads/2023/03/Untitled-design-76.png",
+      "https://tripleseat.com/wp-content/uploads/2022/08/The-Rise-of-Boutique-Bowling-Alleys.png"
+    ];
+
+    function startPhotoShuffle() {
+      const img = document.getElementById("photo-shuffler");
+      if (!img) return;
+
+      let index = 0;
+      img.src = shufflerImages[index];
+
+      setInterval(() => {
+        index = (index + 1) % shufflerImages.length;
+        img.src = shufflerImages[index];
+      }, 3000);
+    }
+
+    updateContent("home");
+  </script>
+</body>
+</html>
